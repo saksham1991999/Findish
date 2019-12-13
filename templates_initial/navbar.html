@@ -1,0 +1,83 @@
+{% load static %}
+{% comment %}
+{% load cart_template_tags %}
+{% endcomment %}
+
+<!-- Header section -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- logo -->
+    <div class="site-logo">
+        <img src="{% static 'img/logo.png' %}" alt="logo" width=100 height=100>
+    </div>
+    <a class="navbar-brand" href="{% url 'core:home' %}">&nbsp FINDISH INDIA</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+        <ul class="navbar-nav">    
+            <li class="nav-item {% if request.resolver_match.view_name == 'core:home' %}active{% endif %}"><a class="nav-link" href="{% url 'core:home' %}">Home</a></li>
+            <li class="nav-item {% if request.resolver_match.view_name == 'core:bod' %}active{% endif %}"><a class="nav-link" href="{% url 'core:bod' %}">Board Of Directors</a></li>
+            <li class="nav-item {% if request.resolver_match.view_name == 'core:r&d' %}active{% endif %}"><a class="nav-link" href="{% url 'core:r&d' %}">Research and Development</a></li>
+            <li class="nav-item {% if request.resolver_match.view_name == 'core:products' %}active{% endif %}"><a class="nav-link" href="{% url 'core:products' %}">Products</a></li>
+            <li class="nav-item {% if request.resolver_match.view_name == 'core:bod' %}active{% endif %}"><a class="nav-link" href="{% url 'core:bod' %}">Blog</a></li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown08">
+                <a class="dropdown-item" href="{% url 'core:about' %}">About Us</a>
+                <a class="dropdown-item" href="{% url 'core:contact' %}">Contact Us</a>
+            </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Right -->
+    <ul class="navbar-nav nav-flex-icons">
+            {% if request.user.is_authenticated %}
+            <div class="header-right">
+                <a href="{% url 'core:order-summary' %}" class="card-bag"><img src="{% static 'img/icons/bag.png' %}" alt=""><span>0{% comment %}{{ request.user|cart_item_count }}{% endcomment %}</span></a>
+            </div>
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+                <span class="clearfix d-none d-sm-inline-block">&nbsp Logout </span>
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                <span class="clearfix d-none d-sm-inline-block"> Login </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+                <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+
+
+{% comment %}
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="#home" class="w3-bar-item w3-button w3-wide">LOGO</a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+        <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+  
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  {% endcomment %}

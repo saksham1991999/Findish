@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+	<!-- Page -->
+	<div class="page-area product-page spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<figure>
+						<img class="product-big-img" src="{{ product.main_image.url }}" alt="">
+					</figure>
+					<div class="product-thumbs">
+						<div class="product-thumbs-track">
+							{% if product.image1 %}<div class="pt" data-imgbigurl="{{ product.image1.url }}"><img src="{{ product.image1.url }}" alt=""></div>{% endif %}
+							{% if product.image2 %}<div class="pt" data-imgbigurl="{{ product.image2.url }}"><img src="{{ product.image2.url }}" alt=""></div>{% endif %}
+							{% if product.image3 %}<div class="pt" data-imgbigurl="{{ product.image3.url }}"><img src="{{ product.image3.url }}" alt=""></div>{% endif %}
+							{% if product.image4 %}<div class="pt" data-imgbigurl="{{ product.image4.url }}"><img src="{{ product.image4.url }}" alt=""></div>{% endif %}
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="product-content">
+						<h2>{{product.title }}</h2>
+						<p>{{ product.label }}</p>
+						<div class="">
+							<h4 class="price">Price : ₹ {{ product.price}}</h4>
+						</div>
+						
+						<a href="{% url 'core:notify' %}" ><button class="site-btn btn-line"><i class="fa fa-envelope"></i>  &nbsp NOTIFY ME</button></a>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="product-details">
+				<div class="row">
+					<div class="col-lg-10 offset-lg-1">
+						<ul class="nav" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Description</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<!-- single tab content -->
+							<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+								<p>{{ product.description }} {{ request.path }}  {{ request.get_full_path }}
+									{% url 'core:notify' %}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="text-center rp-title">
+				<h5>Related products</h5>
+			</div>
+			<div class="row">
+				{% for product in products %}
+				<div class="col-lg-3">
+					<div class="product-item">
+						<figure>
+							<img src="{{ product.main_image.url }}" alt="">
+							<div class="pi-meta">
+								<div class="pi-m-left">
+									<img src="{% static 'img/icons/eye.png' %}" alt="">
+									<p>quick view</p>
+								</div>
+								<div class="pi-m-right">
+									<img src="{% static 'img/icons/heart.png' %}" alt="">
+									<p>save</p>
+								</div>
+							</div>
+						</figure>
+						<div class="product-info">
+							<h6>{{ product.title }}</h6>
+							<a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Description</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- Page end -->
+
+{% endblock content %}
