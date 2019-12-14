@@ -28,7 +28,7 @@ def HomeView(request):
         'topproducts': topproducts,
         'members': members,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'index.html', context)
 
 def BaseView(request):
     context = {
