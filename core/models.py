@@ -1,6 +1,13 @@
 from django.db import models
 from django_countries.fields import CountryField
 
+Product_Categories = (
+    ('OF', 'Organic Food Products'),
+    ('MF', 'Medicinal Food Products'),
+    ('EP', 'Electromnics Products'),
+    ('CF', 'Cattle Feeds'),
+)
+
 class board_of_members(models.Model):
     id = models.AutoField(primary_key = True)
     name = models.CharField(max_length = 50)
@@ -15,11 +22,33 @@ class board_of_members(models.Model):
     class Meta:
         verbose_name_plural = 'Board Of Members'
 
+
+class categories(models.Model):
+    title = models.CharField(max_length = 100)
+    image = models.ImageField(blank = True, null = True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+class subcategories(models.Model):
+    title = models.CharField(max_length = 100)
+    category = models.ForeignKey(categories, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Sub-Categories'
+
 class product(models.Model):
     product_id = models.AutoField(primary_key = True)
     title = models.CharField(max_length = 50)
     description = models.TextField(blank = True, null=True)
-    category = models.CharField(max_length = 25)
+    category = models.ForeignKey(categories, on_delete = models.CASCADE, blank = True, null=True)
+    subcategory = models.ForeignKey(subcategories, on_delete = models.CASCADE, blank = True, null=True)
     label = models.CharField(max_length = 25)
     price = models.FloatField()
     main_image = models.ImageField()
@@ -86,7 +115,9 @@ class RandDSlideshow(models.Model):
     description = models.TextField(blank = True, null = True)
 
     class Meta:
-        verbose_name_plural = 'R&D Slideshow'
+        verbose_name_plural = 'Research & Development Slideshow'
+
+
 
 #from django.core.validators import RegexValidator
 #phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")

@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from datetime import date
 
-from .models import board_of_members, product, team_members, HomeSlideshow, RandDSlideshow
+from .models import board_of_members, product, team_members, HomeSlideshow, RandDSlideshow, categories, subcategories
 from .forms import NotifyMeForm, ContactForm
 # Create your views here.
 
@@ -23,8 +23,11 @@ def HomeView(request):
     slideshow = HomeSlideshow.objects.all()
     topproducts = product.objects.all()[:4]
     members = team_members.objects.all()[:4]
+    Product_Categories = categories.objects.all()[:4]
+    print(Product_Categories)
     context = {
         'slideshow': slideshow,
+        'categories':   Product_Categories,
         'topproducts': topproducts,
         'members': members,
     }

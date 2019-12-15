@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-	<!--/ Carousel Star /-->
+  <!--/ Carousel Star /-->
     <div class="intro intro-carousel">
         <div id="carousel" class="owl-carousel owl-theme">
           {% for slide in slideshow %}
@@ -34,4 +34,85 @@
         </div>
     </div>
     <!--/ Carousel end /-->
+
+<!--/ Categories /-->
+  <section class="section-agents section-t8">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Products</h2>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        {% for category in categories %}
+        <div class="col-md-3">
+          <div class="card-box-d">
+            <div class="card-img-d">
+              <img src="{{ category.image.url }}" alt="" class="img-d img-fluid" height="200" width="300">
+            </div>
+
+            <div class="card-overlay card-overlay-hover">
+
+              <div class="card-header-d">
+                <div class="card-title-d align-self-center">
+                  <h5 class="title-d">
+                    <a href="agent-single.html" class="link-two">{{ category.title }}
+                    </a>
+                  </h5>
+                </div>
+              </div>
+
+              <div class="card-body-d">
+                <p class="content-d color-text-a">
+                  <a href="agent-single.html" class="link-two">View all Products
+                    </a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!--/ Categories End /-->
+
+<!-- Team Container -->
+  <section class="section-agents section-t8">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title-wrap d-flex justify-content-between">
+            <div class="title-box">
+              <h2 class="title-a">Team</h2>
+            </div>
+
+            <div class="title-link">
+              <a href="agents-grid.html">All Team Members
+                <span class="ion-ios-arrow-forward"></span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="w3-row"><br>
+      {% for member in members %}
+      <div class="w3-quarter">
+        <img src="{{ member.image.url }}" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.designation }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+<!-- Team Container End -->
+
 {% endblock content %}
