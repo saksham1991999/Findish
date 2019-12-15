@@ -57,7 +57,7 @@ class ContactForm(forms.ModelForm):
         }
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4}),
-            'country': CountrySelectWidget(attrs={'class': 'custom-select d-block w-100', 'style':"margin-bottom: 25px"})
+            'country': CountrySelectWidget(attrs={ 'style':"margin-bottom: 25px"})
         }
 
         def clean_sender_email(self):

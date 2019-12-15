@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Page -->
+  <div class="page-area contact-page">
+    <div class="container spad">
+      <div class="text-center">
+        <h4 class="contact-title">Notify</h4>
+      </div>
+      <div class="col-md-6 offset-sm-3">
+        <form class="form-a contactForm" action="" method="post" role="form">
+                {% csrf_token %}
+
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div class="row">
+                <div class="col-md-6 mb-3">
+                    {% for field in form %}
+                    <div id="errormessage">{{ field.errors }}</div>
+
+                    {{ field.label_tag }}
+                    <div class="form-group">
+                      {{ field }}
+                    </div>
+                    {% endfor%}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="text-center">
+                    <input type="submit" value="SEND MESSAGE" class="btn btn-a">
+                  </div>
+                </div>
+              </form>
+      </div>
+    </div>
+  </div>
+  <!-- Page end -->
+
+{% endblock content %}
